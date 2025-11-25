@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall of Target - Menu</title>
+    <style>
+        :root {
+            --primary-color: #d2b48c; /* Desert sand/beige */
+            --secondary-color: #8b4513; /* Saddle brown */
+            --accent-color: #f5f5dc; /* Beige/cream */
+            --text-color: #333;
+            --light-bg: #faf0e6; /* Linen */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--primary-color) 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 50%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(100px); }
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+            animation: growWidth 1s ease-out;
+        }
+
+        @keyframes growWidth {
+            from { width: 0; }
+            to { width: 50px; }
+        }
+
+        .menu-section {
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-out both;
+        }
+
+        .menu-section:nth-child(1) { animation-delay: 0.2s; }
+        .menu-section:nth-child(2) { animation-delay: 0.4s; }
+        .menu-section:nth-child(3) { animation-delay: 0.6s; }
+        .menu-section:nth-child(4) { animation-delay: 0.8s; }
+        .menu-section:nth-child(5) { animation-delay: 1s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--primary-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background: var(--accent-color);
+            transform: translateX(10px);
+            border-radius: 5px;
+            padding-left: 10px;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            background: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover .price {
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--secondary-color);
+            color: white;
+            margin-top: 40px;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .price {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Wall of Target</h1>
+        <p>Welcome to our stall at the fete! Enjoy our delicious treats and fun items.</p>
+    </header>
+    <div class="container">
+        <section class="menu-section">
+            <h2>Novelty Items</h2>
+            <div class="menu-item">
+                <span class="item-name">Spinning Pen</span>
+                <span class="price">₹60/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Glue Pen</span>
+                <span class="price">₹50/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Monopoly Cards</span>
+                <span class="price">₹120/1</span>
+            </div>
+        </section>
+        
+        <section class="menu-section">
+            <h2>Candies</h2>
+            <div class="menu-item">
+                <span class="item-name">Finger Lollipop</span>
+                <span class="price">₹15-20/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">CC Sticks</span>
+                <span class="price">₹3-4/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Khatam Khatta</span>
+                <span class="price">₹2/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Balle Balle</span>
+                <span class="price">₹3/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Imli</span>
+                <span class="price">₹1/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Car Candy</span>
+                <span class="price">₹25/1</span>
+            </div>
+        </section>
+        
+        <section class="menu-section">
+            <h2>Dipsticks</h2>
+            <div class="menu-item">
+                <span class="item-name">Jalapeno Dipsticks</span>
+                <span class="price">₹70/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Peri Peri Dipsticks</span>
+                <span class="price">₹70/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Dipsticks</span>
+                <span class="price">₹40/1</span>
+            </div>
+        </section>
+        
+        <section class="menu-section">
+            <h2>Fudge</h2>
+            <div class="menu-item">
+                <span class="item-name">Oreo Fudge</span>
+                <span class="price">₹30/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Hazelnut Fudge</span>
+                <span class="price">₹45/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Red Velvet Fudge</span>
+                <span class="price">₹45/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Vanilla Fudge</span>
+                <span class="price">₹35/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Mocha Fudge</span>
+                <span class="price">₹45/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Belgium Fudge</span>
+                <span class="price">₹40/1</span>
+            </div>
+        </section>
+        
+        <section class="menu-section">
+            <h2>Drinks</h2>
+            <div class="menu-item">
+                <span class="item-name">Sprite</span>
+                <span class="price">₹35/1</span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Coca-Cola</span>
+                <span class="price">₹35/1</span>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2K25 Wall of Target. All rights reserved. Visit us at the fete!</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe menu sections
+        document.querySelectorAll('.menu-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add hover sound effect (optional, requires audio file)
+        // For now, just console log on hover
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                console.log('Hovered on ' + item.querySelector('.item-name').textContent);
+            });
+        });
+
+        // Parallax effect on header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            header.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>
